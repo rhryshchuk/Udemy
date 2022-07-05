@@ -1,7 +1,17 @@
 "Use strict";
 
 
- let numberOfFilms = +prompt("Скільки фільмів ви глянули", " ");
+let numberOfFilms;
+ 
+function start() {
+    numberOfFilms = +prompt("Скільки фільмів ви глянули", " ");
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("Скільки фільмів ви глянули", " ");
+    }
+}
+
+start();
 let personalMovieD = {
     count: numberOfFilms,
     movies: {},
@@ -16,7 +26,9 @@ let personalMovieD = {
  personalMovieD.movies[a] = b;
 personalMovieD.movies[c] = d;
  
-for (let i = 0; i < 2; i++) {
+
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++) {
      let a = prompt("Один з осанніх фільмів", " "),
         b = prompt("Оцінка фільму", " ");
     
@@ -26,11 +38,13 @@ for (let i = 0; i < 2; i++) {
     } else {
         console.log('error');
         i--;
-    }
-        
-   
-}   
-if (personalMovieD.count < 10) {
+    } 
+}
+}
+rememberMyFilms();
+
+function detectPersonalLevel() {
+    if (personalMovieD.count < 10) {
     console.log('мало фільмів');
 } else if (personalMovieD.count >= 10 && personalMovieD.count <= 30 ) {
     console.log('нормально фільмів');
@@ -39,5 +53,20 @@ if (personalMovieD.count < 10) {
 } else {
     console.log('error');
 }
+}
+detectPersonalLevel();
 console.log(personalMovieD);
- 
+
+function ShowMyDB() {
+    if (personalMovieD.privat == false) {
+        console.log(personalMovieD);
+    } 
+}
+ShowMyDB();
+function writeYourGeres() {
+    for (let i = 1; i <= 3; i++) {
+        const genre = prompt(`Ваш улюблений жанр під номером ${i}`);
+        personalMovieD.genres[i - 1] = genre;
+    }
+}
+writeYourGeres();
